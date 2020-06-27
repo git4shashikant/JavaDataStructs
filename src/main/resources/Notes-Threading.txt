@@ -1,0 +1,44 @@
+- Compare Locks with synchronized keyword 
+Answer. point 7, 16
+- what is reentrant lock
+Answer. point 5
+
+Important points of synchronized keyword in Java
+------------------------------------------------
+1. Synchronized keyword in Java is used to provide mutual exclusive access of a shared resource with multiple threads in Java.
+   Synchronization in Java guarantees that, no two threads can execute a synchronized method which requires same lock simultaneously or concurrently.
+2. You can use java synchronized keyword only on synchronized method or synchronized block.
+3. When ever a thread enters into java synchronized method or block it acquires a lock and whenever it leaves java synchronized method or block it 
+   releases the lock. Lock is released even if thread leaves synchronized method after completion or due to any Error or Exception.
+4. Java Thread acquires an object level lock when it enters into an instance synchronized java method and acquires a class level lock when it enters 
+   into static synchronized java method.
+5. Java synchronized keyword is re-entrant in nature it means if a java synchronized method calls another synchronized method which requires same lock
+   then current thread which is holding lock can enter into that method without acquiring lock.
+6. Java Synchronization will throw NullPointerException if object used in java synchronized block is null e.g. synchronized (myInstance) will throws 
+   java.lang.NullPointerException if myInstance is null.
+7. One Major disadvantage of Java synchronized keyword is that it doesn't allow concurrent read, which can potentially limit scalability. By using concept
+   of lock stripping and using different locks for reading and writing, you can overcome this limitation of synchronized in Java. You will be glad to know 
+   that java.util.concurrent.locks.ReentrantReadWriteLock provides ready made implementation of ReadWriteLock in Java.
+8. One more limitation of java synchronized keyword is that it can only be used to control access of shared object within the same JVM. If you have more 
+   than one JVM and need to synchronized access to a shared file system or database, the Java synchronized keyword is not at all sufficient. You need to
+   implement a kind of global lock for that.
+9. Java synchronized keyword incurs performance cost. Synchronized method in Java is very slow and can degrade performance. So use synchronization in java
+   when it absolutely requires and consider using java synchronized block for synchronizing critical section only.
+10. Java synchronized block is better than java synchronized method in Java because by using synchronized block you can only lock critical section of code
+    and avoid locking whole method which can possibly degrade performance. A good example of java synchronization around this concept is getInstance() 
+    method Singleton class. See here.
+11. Its possible that both static synchronized and non static synchronized method can run simultaneously or concurrently because they lock on different object.
+12. From java 5 after change in Java memory model reads and writes are atomic for all variables declared using volatile keyword (including long and double variables)
+    and simple atomic variable access is more efficient instead of accessing these variables via synchronized java code. But it requires more care and attention from
+    the programmer to avoid memory consistency errors.
+13. Java synchronized code could result in deadlock or starvation while accessing by multiple thread if synchronization is not implemented correctly.
+14. According to the Java language specification you can not use Java synchronized keyword with constructor it’s illegal and result in compilation error.
+15. You cannot apply java synchronized keyword with variables and can not use java volatile keyword with method.
+16. Java.util.concurrent.locks extends capability provided by java synchronized keyword for writing more sophisticated programs since they offer more 
+    capabilities e.g. Reentrant and interrupted locks.
+17. Java synchronized keyword also synchronizes memory. In fact java synchronized synchronizes the whole of thread memory with main memory.
+18. Important method related to synchronization in Java are wait(), notify() and notifyAll() which is defined in Object class.
+19. Do not synchronize on non final field on synchronized block in Java. because reference of non final field may change any time and then different thread might synchronizing on different objects i.e. no synchronization at all. example of synchronizing on non final field :
+20. Its not recommended to use String object as lock in java synchronized block as String are immutable and string can lock the multiple resources even if they are connected.
+
+

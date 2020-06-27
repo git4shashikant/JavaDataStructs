@@ -1,0 +1,23 @@
+when is the possibility for singleton class to not behave singleton
+1. using clone method. To avoid this preferred way is not to implement Cloneable interface as why should one wants to create clone() of Singleton 
+   and if you do just throw Exception from clone() method as  “Can not create clone of Singleton class”.
+2. Using reflection Since constructor of Singleton class is supposed to be private it prevents creating instance of Singleton from outside but 
+   Reflection can access private fields and methods, which opens a threat of another instance. This can be avoided by throwing Exception from 
+   constructor as “Singleton already initialized”
+3. during serialization. 
+4. Another problem with conventional Singletons are that once you implement Serializable interface they are no longer remain Singleton because 
+   readObject() method always return a new instance just like constructor in Java. you can avoid that by using readResolve() method and discarding 
+   newly created instance by replacing with Singleton as shown in below example :
+
+    //readResolve to prevent another instance of Singleton
+    private Object readResolve(){
+        return INSTANCE;
+    }
+
+   This can become even more complex if your Singleton Class maintain state, as you need to make them transient, but witn Enum Singleton, Serialization 
+   is guarnateed by JVM.
+
+
+general terms:
+Lock fairness
+Race Conditions, starvation & Critical Sections 
